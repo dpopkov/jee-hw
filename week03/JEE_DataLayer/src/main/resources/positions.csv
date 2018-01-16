@@ -1,0 +1,4 @@
+RegularEmployee,ViewPersonalInfo
+Accountant,ViewPersonalInfo,ViewSalary,EditSalary
+HR,ViewPersonalInfo,EditPersonalInfo,AddEmployee,RemoveEpmloyee
+Director,ViewPersonalInfo,ViewSalary,EditSalary,EditPersonalInfo,AddEmployee,RemoveEpmloyee
