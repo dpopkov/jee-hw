@@ -2,10 +2,7 @@ package ru.otus.dpopkov.jdbc.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +12,7 @@ public class Role {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(unique = true)
     private String name;
     @ManyToMany(mappedBy = "roles")
     private Set<Position> positions = new HashSet<>();

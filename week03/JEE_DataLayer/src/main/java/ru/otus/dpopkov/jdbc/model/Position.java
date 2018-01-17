@@ -12,6 +12,7 @@ public class Position {
     @Id
     @GeneratedValue
     private Long id;
+    @Column(unique = true)
     private String name;
     @OneToMany(mappedBy = "position")
     private Set<Employee> employees = new HashSet<>();
