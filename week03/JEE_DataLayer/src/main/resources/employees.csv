@@ -1,10 +1,10 @@
-Captain Jack Sparrow,jsparrow,Director
-Elizabeth Swann,eswann,HR
-Captain Hector Barbossa,hbarbossa,Accountant
-Commodore James Norrington,jnorrington,Accountant
-William Turner Jr.,wturner,RegularEmployee
-Joshamee Gibbs,jgibbs,RegularEmployee
-Anamaria,anamaria,RegularEmployee
-Pintel,pintel,RegularEmployee
-Ragetti,ragetti,RegularEmployee
-Marty,marty,RegularEmployee
+Captain Jack Sparrow,jsparrow,Director,200000
+Elizabeth Swann,eswann,HR,100000
+Captain Hector Barbossa,hbarbossa,Accountant,90000
+Commodore James Norrington,jnorrington,Accountant,85000
+William Turner Jr.,wturner,RegularEmployee,80000
+Joshamee Gibbs,jgibbs,RegularEmployee,70000
+Anamaria,anamaria,RegularEmployee,60000
+Pintel,pintel,RegularEmployee,50000
+Ragetti,ragetti,RegularEmployee,40000
+Marty,marty,RegularEmployee,40000

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -25,8 +26,8 @@ import java.util.*;
 )
 public class InitDataServlet extends HttpServlet {
 
-    public static final String POSITIONS_CSV_LOCATION = "/positions.csv";
-    public static final String EMPLOYEES_CSV_LOCATION = "/employees.csv";
+    private static final String POSITIONS_CSV_LOCATION = "/positions.csv";
+    private static final String EMPLOYEES_CSV_LOCATION = "/employees.csv";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,19 +47,6 @@ public class InitDataServlet extends HttpServlet {
     }
 
     private void addDataToDb(EntityManager em) throws IOException {
-        /*Role viewPersonal = new Role();
-        viewPersonal.setName("ViewPersonalInfo");
-
-        Position regular = new Position();
-        regular.setName("RegularEmployee");
-        regular.getRoles().add(viewPersonal);
-
-        Employee employee = new Employee();
-        employee.setFullName("Jack Sparrow");
-        employee.setPosition(regular);
-
-        em.persist(employee);*/
-
         Map<String, Position> positionMap = readPositions();
         List<Employee> employeeList = readEmployees(positionMap);
         for (Employee employee : employeeList) {
@@ -91,13 +79,13 @@ public class InitDataServlet extends HttpServlet {
         List<Employee> employeeList = new ArrayList<>();
         List<String[]> list = csvToList(EMPLOYEES_CSV_LOCATION);
         for(String[] line : list) {
-            // todo: create every employee
             String fullName = line[0];
             Employee employee = new Employee();
             employee.setFullName(fullName);
             employee.setLogin(line[1]);
             Position position = positionMap.get(line[2]);
             employee.setPosition(position);
+            employee.setSalary(new BigDecimal(line[3]));
             employeeList.add(employee);
         }
         return employeeList;

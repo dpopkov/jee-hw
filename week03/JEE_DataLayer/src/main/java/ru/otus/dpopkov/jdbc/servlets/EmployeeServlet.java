@@ -75,6 +75,8 @@ public class EmployeeServlet extends HttpServlet {
 
             employee.setFullName(employeeFullName);
             employee.setPosition(position);
+
+            transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
             throw new ServletException(e);
@@ -82,7 +84,6 @@ public class EmployeeServlet extends HttpServlet {
             em.close();
         }
 
-        transaction.commit();
         resp.sendRedirect("employees");
     }
 
@@ -109,17 +110,21 @@ public class EmployeeServlet extends HttpServlet {
         EntityTransaction transaction = em.getTransaction();
         try {
             transaction.begin();
-            Query query = em.createQuery("select e from Employee as e order by e.id desc");
+            TypedQuery<Employee> query = em.createQuery("select e from Employee as e order by e.id desc",
+                    Employee.class);
             List<Employee> employees = query.getResultList();
             PrintWriter writer = writeHtmlHeader(resp);
 
             writer.append("<table>\r\n");
+            writeEmployeesHeader(writer);
             for (Employee emp : employees) {
                 writeEmployee(writer, emp);
             }
             writer.append("</table>\r\n");
 
             writeHtmlFooter(writer);
+
+            transaction.commit();
         } catch (Exception e) {
             transaction.rollback();
             throw new ServletException(e);
@@ -127,7 +132,10 @@ public class EmployeeServlet extends HttpServlet {
             em.close();
         }
 
-        transaction.commit();
+    }
+
+    private void writeEmployeesHeader(PrintWriter writer) {
+        writer.append("<tr><th>Id</th><th>Full name</th><th>Login</th><th>Position</th><th>Salary</th></tr>\r\n");
     }
 
     private void writeEmployee(PrintWriter writer, Employee emp) {
@@ -139,6 +147,8 @@ public class EmployeeServlet extends HttpServlet {
         writer.append(emp.getLogin());
         writer.append("</td><td>\r\n");
         writer.append(emp.getPosition().getName());
+        writer.append("</td><td>\r\n");
+        writer.append(emp.getSalary().toString());
         writer.append("</td></tr>\r\n");
     }
 
