@@ -46,10 +46,36 @@ public class EmployeeServlet extends HttpServlet {
             case "edit":
                 editEmployee(req, resp);
                 break;
+            case "remove":
+                removeEmployee(req, resp);
+                break;
             default:
                 resp.sendRedirect("employees");
                 break;
         }
+    }
+
+    private void removeEmployee(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String employeeIdParam = req.getParameter("employeeId");
+
+        EntityManager em = JPASessionUtil.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            Long employeeId = Long.parseLong(employeeIdParam);
+            Query query = em.createQuery("delete from Employee as e where e.id=:employeeId");
+            query.setParameter("employeeId", employeeId);
+            query.executeUpdate();
+
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            throw new ServletException(e);
+        } finally {
+            em.close();
+        }
+
+        resp.sendRedirect("employees");
     }
 
     private void editEmployee(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -131,7 +157,6 @@ public class EmployeeServlet extends HttpServlet {
         } finally {
             em.close();
         }
-
     }
 
     private void writeEmployeesHeader(PrintWriter writer) {
@@ -149,6 +174,8 @@ public class EmployeeServlet extends HttpServlet {
         writer.append(emp.getPosition().getName());
         writer.append("</td><td>\r\n");
         writer.append(emp.getSalary().toString());
+        writer.append("</td><td>\r\n");
+        writer.append(buildRemoveEmployeeForm(emp.getId()));
         writer.append("</td></tr>\r\n");
     }
 
@@ -160,5 +187,13 @@ public class EmployeeServlet extends HttpServlet {
 
     private void writeHtmlFooter(PrintWriter writer) {
         writer.append("</body></html>");
+    }
+
+    private String buildRemoveEmployeeForm(Long id) {
+        return "<form action=\"employees\" method=\"POST\">\n" +
+                "        <input type=\"hidden\" name=\"action\" value=\"remove\">\n" +
+                "        <input type=\"hidden\" name=\"employeeId\" value=\"" + id + "\">\n" +
+                "        <input type=\"submit\" value=\"Remove\">\n" +
+                "    </form>";
     }
 }
