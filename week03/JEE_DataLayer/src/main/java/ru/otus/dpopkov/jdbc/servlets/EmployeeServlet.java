@@ -4,10 +4,7 @@ import ru.otus.dpopkov.jdbc.model.Employee;
 import ru.otus.dpopkov.jdbc.model.Position;
 import ru.otus.dpopkov.jdbc.util.JPASessionUtil;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +19,9 @@ import java.util.List;
         urlPatterns = {"/employees"}
 )
 public class EmployeeServlet extends HttpServlet {
+
+    private static final String STORED_PROCEDURE_EMPLOYEE_NAME_MAX_SALARY = "employee_name_max_salary";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -31,6 +31,9 @@ public class EmployeeServlet extends HttpServlet {
         switch(action) {
             case "edit":
                 showEditEmployeeForm(resp);
+                break;
+            case "maxSalary":
+                showEmployeeWithMaxSalary(resp);
                 break;
             case "list":
             default:
@@ -52,6 +55,51 @@ public class EmployeeServlet extends HttpServlet {
             default:
                 resp.sendRedirect("employees");
                 break;
+        }
+    }
+
+    private void showEmployeeWithMaxSalary(HttpServletResponse resp) throws ServletException {
+        EntityManager em = JPASessionUtil.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+
+            createStoredProcedure();
+
+            StoredProcedureQuery query = em.createStoredProcedureQuery(STORED_PROCEDURE_EMPLOYEE_NAME_MAX_SALARY);
+            String name = (String)query.getSingleResult();  // todo: try to replace method to getResultList()
+            PrintWriter writer = resp.getWriter();
+            writer.println("Employee with maximum salary: " + name);
+
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            throw new ServletException(e);
+        } finally {
+            em.close();
+        }
+    }
+
+    private void createStoredProcedure() throws ServletException {
+        EntityManager em = JPASessionUtil.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+
+            // todo: fix the warning below
+            // Warning: No data sources are configured to run this SQL and provide advanced code assistance.
+            String sqlCreateFunction = "create or replace function employee_name_max_salary()\n" +
+                    "returns character varying(255) as\n" +
+                    "$$ select e.fullname from employee as e where e.salary in (select max(salary) from employee) $$\n" +
+                    "language 'sql' volatile;";
+            em.createNativeQuery(sqlCreateFunction).executeUpdate();
+
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+            throw new ServletException(e);
+        } finally {
+            em.close();
         }
     }
 
