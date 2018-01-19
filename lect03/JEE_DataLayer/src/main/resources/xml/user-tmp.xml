@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customer id="42">
+    <age>33</age>
+    <name>Jack Sparrow</name>
+    <salary>100000.00</salary>
+</customer>
