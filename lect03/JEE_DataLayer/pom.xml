@@ -64,6 +64,13 @@
       <version>RELEASE</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- Custom ObjectResourceFactory -->
+    <dependency>
+      <groupId>ru.otus.dpopkov.resource</groupId>
+      <artifactId>ObjectResourceFactory</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>
