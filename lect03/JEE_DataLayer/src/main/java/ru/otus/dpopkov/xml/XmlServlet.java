@@ -22,13 +22,35 @@ public class XmlServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
+        String name = getParameter(req,"name", "Jack Sparrow");
+        int id = getIntParameter(req, "id", 42);
+        int age = getIntParameter(req, "age", 33);
+
         Customer c = new Customer();
-        c.setName("Jack Sparrow");
-        c.setId(42);
-        c.setAge(33);
+        c.setName(name);
+        c.setId(id);
+        c.setAge(age);
         c.setSalary(new BigDecimal("100000.00"));
         xmlBean.process(c);
+
+        PrintWriter writer = resp.getWriter();
         writer.println("xml path = " + xmlBean.getXmlPath());
+    }
+
+    private String getParameter(HttpServletRequest req, String name, String defaultValue) {
+        String param = req.getParameter(name);
+        if (param == null) {
+            param = defaultValue;
+        }
+        return param;
+    }
+
+    private int getIntParameter(HttpServletRequest req, String name, int defaultValue) {
+        String strValue = req.getParameter(name);
+        if (strValue == null) {
+            return defaultValue;
+        } else {
+            return Integer.parseInt(strValue);
+        }
     }
 }
