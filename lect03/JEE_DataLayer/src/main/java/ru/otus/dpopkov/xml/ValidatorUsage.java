@@ -13,7 +13,7 @@ import java.net.URL;
 public class ValidatorUsage {
     public static void main(String[] args) {
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        URL schemaFile = ValidatorUsage.class.getResource("/xml/schema1.xsd");
+        URL schemaFile = ValidatorUsage.class.getResource("/xml/customer.xsd");
 
         try {
             Schema schema = schemaFactory.newSchema(schemaFile);
