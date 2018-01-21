@@ -1,4 +1,4 @@
-package ru.otus.dpopkov.xmljsonhw;
+package ru.otus.dpopkov.xmljsonhw.research;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

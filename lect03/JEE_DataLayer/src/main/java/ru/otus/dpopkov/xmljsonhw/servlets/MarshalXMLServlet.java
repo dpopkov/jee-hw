@@ -1,4 +1,4 @@
-package ru.otus.dpopkov.xmljsonhw;
+package ru.otus.dpopkov.xmljsonhw.servlets;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -141,6 +141,7 @@ public class MarshalXMLServlet extends HttpServlet {
         writer.println("xml path = " + xmlBean.getXmlPath());
     }
 
+    //todo: remove not needed method
     /* This method used for testing */
     private List<Employee> prepareEmployees() {
         List<Employee> list = new ArrayList<>();
@@ -155,7 +156,7 @@ public class MarshalXMLServlet extends HttpServlet {
         return list;
     }
 
-
+    //todo: remove not needed method
     private void process(Object persistObject, OutputStream outputStream) {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(persistObject.getClass());

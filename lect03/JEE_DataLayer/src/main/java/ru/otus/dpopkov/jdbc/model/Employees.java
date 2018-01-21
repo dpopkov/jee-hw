@@ -6,11 +6,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Iterator;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "employees")
-public class Employees {
+public class Employees implements Iterable<Employee> {
     @XmlElement(name = "employee", type = Employee.class)
     private List<Employee> employeeList;
 
@@ -35,5 +36,18 @@ public class Employees {
             total = total.add(employee.getSalary());
         }
         return total.divide(BigDecimal.valueOf(employeeList.size()), RoundingMode.HALF_UP);
+    }
+
+    @Override
+    public Iterator<Employee> iterator() {
+        return employeeList.iterator();
+    }
+
+    public int size() {
+        return employeeList.size();
+    }
+
+    public Employee get(int index) {
+        return employeeList.get(index);
     }
 }
