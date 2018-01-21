@@ -4,6 +4,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -25,5 +27,13 @@ public class Employees {
 
     public void setEmployeeList(List<Employee> employees) {
         this.employeeList = employees;
+    }
+
+    public BigDecimal getAverageSalary() {
+        BigDecimal total = BigDecimal.ZERO;
+        for (Employee employee : employeeList) {
+            total = total.add(employee.getSalary());
+        }
+        return total.divide(BigDecimal.valueOf(employeeList.size()), RoundingMode.HALF_UP);
     }
 }
