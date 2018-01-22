@@ -14,8 +14,7 @@ public class Employee {
     private String name;
     private Integer age;
     private Position position;
-    @XmlElementWrapper(name = "roleSet")
-    @XmlElement(name = "role")
+
     private Set<Role> roleSet = new HashSet<>();
 
     public Long getId() {
@@ -53,6 +52,8 @@ public class Employee {
         this.position = position;
     }
 
+    @XmlElementWrapper(name = "roleSet")
+    @XmlElement(name = "role")
     public Set<Role> getRoleSet() {
         return roleSet;
     }

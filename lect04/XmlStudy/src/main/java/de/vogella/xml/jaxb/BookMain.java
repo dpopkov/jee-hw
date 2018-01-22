@@ -18,7 +18,7 @@ public class BookMain {
 
     public static void main(String[] args) throws JAXBException, IOException {
 
-        ArrayList<Book> bookList = new ArrayList<Book>();
+        ArrayList<Book> bookList = new ArrayList<>();
 
         // create books
         Book book1 = new Book();
@@ -37,7 +37,7 @@ public class BookMain {
 
         // create bookstore, assigning book
         Bookstore bookstore = new Bookstore();
-        bookstore.setName("Fraport Bookstoreeeeee");
+        bookstore.setName("Fraport Bookstore");
         bookstore.setLocation("Frankfurt Airport");
         bookstore.setBookList(bookList);
 
