@@ -1,20 +1,8 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Новостная система</title>
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.5.min.js" type="text/javascript"></script>
-    <script>
-        /*function getCurrencies() {
-            var targetDiv = document.getElementById("currencies");
-
-        }*/
-        $(function() {
-            $.get( "currencies", function( data ) {
-                $('#currencies').html(data);
-            });
-        });
-    </script>
 </head>
 <body>
 
@@ -81,7 +69,7 @@
         <section>
             <h2>Курсы валют</h2>
             <div id="currencies">
-                <p>курсы валют курсы валют курсы валют курсы валют курсы валют курсы валют курсы валют курсы валют </p>
+                <jsp:include page="/currencies"/>
             </div>
         </section>
         <section>
@@ -98,6 +86,6 @@
         </small>
     </footer>
 </div>
-</body>
 
+</body>
 </html>
