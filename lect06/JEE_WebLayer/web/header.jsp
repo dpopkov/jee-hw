@@ -23,7 +23,7 @@
             <li>Вход в систему</li>
             <li>link 1</li>
             <li>link 2</li>
-            <li>link 3</li>
+            <li><a href="run-js.jsp">Run JavaScript</a></li>
         </ul>
     </nav>
 </header>
