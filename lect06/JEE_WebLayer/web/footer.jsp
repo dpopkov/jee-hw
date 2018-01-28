@@ -3,6 +3,6 @@
 <footer>
     <small>Copyright ©
         <time datetime="2018">2018</time>
-        thebestnewsrussia.ru
+        thebestnewsru.ru
     </small>
 </footer>
