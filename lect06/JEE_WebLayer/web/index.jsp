@@ -3,35 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Новостная система</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
-<div>
-    <header>
-        <!-- Шапка сайта: логотип, элемент поиска, общая информация об авторе или телефон организации (меню) -->
-        <div>
-            <div>
-                Logo
-            </div>
-            <div>
-                Поиск
-            </div>
-            <div>
-                Меню
-            </div>
-        </div>
+<div class="body-wrapper">
 
-        <!-- Горизонтальное меню (ссылки на основные разделы сайта) -->
-        <nav>
-            <ul>
-                <li>Главная</li>
-                <li>Вход в систему</li>
-                <li>link 1</li>
-                <li>link 2</li>
-                <li>link 3</li>
-            </ul>
-        </nav>
-    </header>
+    <%@ include file="header.jsp"%>
 
     <!-- Блок основного контента -->
     <main>
@@ -64,27 +42,9 @@
         </section>
     </main>
 
-    <!-- Боковое меню -->
-    <aside>
-        <section>
-            <h2>Курсы валют</h2>
-            <div id="currencies">
-                <jsp:include page="/currencies"/>
-            </div>
-        </section>
-        <section>
-            <h2>Новости</h2>
-            <p>новости новости новости новости новости новости новости новости новости новости новости </p>
-        </section>
-    </aside>
+    <%@ include file="sidebar.jsp"%>
+    <%@ include file="footer.jsp"%>
 
-    <!-- "Подвал" сайта -->
-    <footer>
-        <small>Copyright ©
-            <time datetime="2018">2018</time>
-            thebestnewsru.ru
-        </small>
-    </footer>
 </div>
 
 </body>

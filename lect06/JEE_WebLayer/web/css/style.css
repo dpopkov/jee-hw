@@ -1,0 +1,32 @@
+.body-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.header1 {
+    //height: 68px;
+    width: 100%;
+    border-bottom: 6px solid #233;
+}
+.header-logo {
+    float: left;
+}
+.header-right {
+    float: right;
+    list-style: none;
+}
+
+.header-right li {
+    float: left;
+}
+
+.navigation {
+    clear: both;
+    list-style: none;
+    margin: 20px 0;
+}
+.navigation li {
+    float: left;
+    margin: 5px 20px;
+}
