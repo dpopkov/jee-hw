@@ -22,9 +22,9 @@
     <table>
         <tr>
             <td><a href="index.jsp">Главная</a></td>
-            <td>Вход в систему</td>
-            <td>link 1</td>
-            <td>link 2</td>
+            <td><a href="login.jsp">Вход в систему</a></td>
+            <td><a href="new-idea.jsp">Idea news</a></td>
+            <td><a href="new-eclipse.jsp">Eclipse news</a></td>
             <td><a href="run-js.jsp">Run JavaScript</a></td>
         </tr>
     </table>

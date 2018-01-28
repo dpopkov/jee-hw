@@ -2,7 +2,7 @@
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:output method="html" encoding="UTF-8" omit-xml-declaration="yes"/>
     <xsl:template match="/ValCurs">
-        <table border="1">
+        <table>
             <tr><th>Code</th><th>Name</th><th>Value</th></tr>
             <xsl:apply-templates select="Valute"/>
         </table>

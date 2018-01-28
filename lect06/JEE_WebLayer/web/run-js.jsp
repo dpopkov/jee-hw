@@ -9,7 +9,7 @@
 <body>
 
 <div class="body-wrapper">
-    <table border="1">
+    <table>
         <tr>
             <td colspan="2">
                 <%@ include file="header.jsp"%>
